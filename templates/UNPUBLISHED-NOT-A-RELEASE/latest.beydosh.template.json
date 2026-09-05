@@ -1,0 +1,15 @@
+{
+  "UNPUBLISHED_TEMPLATE_ONLY": true,
+  "Envelope": {
+    "Payload": {
+      "Version": "0.0.0",
+      "ManifestSha256": "REPLACE_WITH_64_HEX_DIGITS",
+      "ManifestUrl": "https://raw.githubusercontent.com/CrystalxSLY/beydosh-updates/REPLACE_WITH_IMMUTABLE_40_HEX_COMMIT/updates/stable/0.0.0/manifest.beydosh.json",
+      "CreatedAtUtc": "REPLACE_WITH_UTC_TIMESTAMP",
+      "Commit": "REPLACE_WITH_EXACT_40_HEX_SOURCE_COMMIT",
+      "KeyId": "REPLACE_WITH_APPROVED_PUBLIC_KEY_ID"
+    },
+    "KeyId": "REPLACE_WITH_APPROVED_PUBLIC_KEY_ID",
+    "SignatureBase64": "GENERATE_OFFLINE_AFTER_CANONICALIZATION"
+  }
+}

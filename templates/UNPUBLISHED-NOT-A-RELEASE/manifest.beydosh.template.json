@@ -1,0 +1,46 @@
+{
+  "UNPUBLISHED_TEMPLATE_ONLY": true,
+  "Envelope": {
+    "Payload": {
+      "Version": "0.0.0",
+      "ReleaseId": "0.0.0",
+      "Commit": "REPLACE_WITH_EXACT_40_HEX_SOURCE_COMMIT",
+      "MinimumLauncher": "0.0.0",
+      "CreatedAtUtc": "REPLACE_WITH_UTC_TIMESTAMP",
+      "KeyId": "REPLACE_WITH_APPROVED_PUBLIC_KEY_ID",
+      "TotalPlainBytes": 0,
+      "TotalCipherBytes": 0,
+      "TotalCipherSha256": "REPLACE_WITH_64_HEX_DIGITS",
+      "Chunks": [
+        {
+          "Index": 0,
+          "Name": "00000.bupd",
+          "AssetUrl": "https://github.com/CrystalxSLY/beydosh-updates/releases/download/v0.0.0/00000.bupd",
+          "CipherBytes": 0,
+          "PlainBytes": 0,
+          "CipherSha256": "REPLACE_WITH_64_HEX_DIGITS",
+          "PlainSha256": "REPLACE_WITH_64_HEX_DIGITS"
+        }
+      ],
+      "PayloadFiles": [
+        {
+          "RelativePath": "REPLACE_WITH_SAFE_RELATIVE_PATH",
+          "Length": 0,
+          "Sha256": "REPLACE_WITH_64_HEX_DIGITS"
+        }
+      ],
+      "Compatibility": {
+        "Platform": "windows",
+        "Architecture": "x64",
+        "PackageFormat": "beydosh-remote-v1"
+      },
+      "Rollback": {
+        "Mode": "blocked",
+        "PreviousVersion": null,
+        "PreviousManifestSha256": null
+      }
+    },
+    "KeyId": "REPLACE_WITH_APPROVED_PUBLIC_KEY_ID",
+    "SignatureBase64": "GENERATE_OFFLINE_AFTER_CANONICALIZATION"
+  }
+}

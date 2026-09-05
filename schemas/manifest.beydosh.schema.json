@@ -1,0 +1,226 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/CrystalxSLY/beydosh-updates/main/schemas/manifest.beydosh.schema.json",
+  "title": "Beydosh signed immutable release manifest",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "Payload",
+    "KeyId",
+    "SignatureBase64"
+  ],
+  "properties": {
+    "Payload": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "Version",
+        "ReleaseId",
+        "Commit",
+        "MinimumLauncher",
+        "CreatedAtUtc",
+        "KeyId",
+        "TotalPlainBytes",
+        "TotalCipherBytes",
+        "TotalCipherSha256",
+        "Chunks",
+        "PayloadFiles",
+        "Compatibility",
+        "Rollback"
+      ],
+      "properties": {
+        "Version": {
+          "$ref": "#/$defs/version"
+        },
+        "ReleaseId": {
+          "$ref": "#/$defs/version"
+        },
+        "Commit": {
+          "type": "string",
+          "pattern": "^[0-9a-fA-F]{40}$"
+        },
+        "MinimumLauncher": {
+          "$ref": "#/$defs/version"
+        },
+        "CreatedAtUtc": {
+          "type": "string",
+          "format": "date-time",
+          "pattern": "Z$"
+        },
+        "KeyId": {
+          "$ref": "#/$defs/keyId"
+        },
+        "TotalPlainBytes": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "TotalCipherBytes": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "TotalCipherSha256": {
+          "$ref": "#/$defs/sha256"
+        },
+        "Chunks": {
+          "type": "array",
+          "minItems": 1,
+          "maxItems": 99999,
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "Index",
+              "Name",
+              "AssetUrl",
+              "CipherBytes",
+              "PlainBytes",
+              "CipherSha256",
+              "PlainSha256"
+            ],
+            "properties": {
+              "Index": {
+                "type": "integer",
+                "minimum": 0,
+                "maximum": 99998
+              },
+              "Name": {
+                "type": "string",
+                "pattern": "^[0-9]{5}\\.bupd$"
+              },
+              "AssetUrl": {
+                "type": "string",
+                "pattern": "^https://github\\.com/CrystalxSLY/beydosh-updates/releases/download/v(0|[1-9][0-9]*)\\.(0|[1-9][0-9]*)\\.(0|[1-9][0-9]*)/[0-9]{5}\\.bupd$"
+              },
+              "CipherBytes": {
+                "type": "integer",
+                "minimum": 1,
+                "maximum": 52428800
+              },
+              "PlainBytes": {
+                "type": "integer",
+                "minimum": 1,
+                "maximum": 52428800
+              },
+              "CipherSha256": {
+                "$ref": "#/$defs/sha256"
+              },
+              "PlainSha256": {
+                "$ref": "#/$defs/sha256"
+              }
+            }
+          }
+        },
+        "PayloadFiles": {
+          "type": "array",
+          "minItems": 1,
+          "maxItems": 10000,
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "RelativePath",
+              "Length",
+              "Sha256"
+            ],
+            "properties": {
+              "RelativePath": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 260
+              },
+              "Length": {
+                "type": "integer",
+                "minimum": 0
+              },
+              "Sha256": {
+                "$ref": "#/$defs/sha256"
+              }
+            }
+          }
+        },
+        "Compatibility": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "Platform",
+            "Architecture",
+            "PackageFormat"
+          ],
+          "properties": {
+            "Platform": {
+              "const": "windows"
+            },
+            "Architecture": {
+              "const": "x64"
+            },
+            "PackageFormat": {
+              "const": "beydosh-remote-v1"
+            }
+          }
+        },
+        "Rollback": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "Mode",
+            "PreviousVersion",
+            "PreviousManifestSha256"
+          ],
+          "properties": {
+            "Mode": {
+              "enum": [
+                "blocked",
+                "manual-approved-only"
+              ]
+            },
+            "PreviousVersion": {
+              "anyOf": [
+                {
+                  "$ref": "#/$defs/version"
+                },
+                {
+                  "type": "null"
+                }
+              ]
+            },
+            "PreviousManifestSha256": {
+              "anyOf": [
+                {
+                  "$ref": "#/$defs/sha256"
+                },
+                {
+                  "type": "null"
+                }
+              ]
+            }
+          }
+        }
+      }
+    },
+    "KeyId": {
+      "$ref": "#/$defs/keyId"
+    },
+    "SignatureBase64": {
+      "type": "string",
+      "minLength": 80,
+      "maxLength": 256,
+      "pattern": "^[A-Za-z0-9+/]+={0,2}$"
+    }
+  },
+  "$defs": {
+    "version": {
+      "type": "string",
+      "pattern": "^(0|[1-9][0-9]*)\\.(0|[1-9][0-9]*)\\.(0|[1-9][0-9]*)$"
+    },
+    "sha256": {
+      "type": "string",
+      "pattern": "^[0-9a-fA-F]{64}$"
+    },
+    "keyId": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 64,
+      "pattern": "^[A-Za-z0-9._-]+$"
+    }
+  }
+}
