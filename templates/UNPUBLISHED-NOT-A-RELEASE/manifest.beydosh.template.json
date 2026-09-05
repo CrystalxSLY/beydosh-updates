@@ -14,8 +14,8 @@
       "Chunks": [
         {
           "Index": 0,
-          "Name": "00000.bupd",
-          "AssetUrl": "https://github.com/CrystalxSLY/beydosh-updates/releases/download/v0.0.0/00000.bupd",
+          "Name": "00001.bupd",
+          "AssetUrl": "https://github.com/CrystalxSLY/beydosh-updates/releases/download/v0.0.0/00001.bupd",
           "CipherBytes": 0,
           "PlainBytes": 0,
           "CipherSha256": "REPLACE_WITH_64_HEX_DIGITS",
