@@ -16,7 +16,6 @@
       "required": [
         "Version",
         "ManifestSha256",
-        "ManifestUrl",
         "CreatedAtUtc",
         "Commit",
         "KeyId"
@@ -28,10 +27,6 @@
         },
         "ManifestSha256": {
           "$ref": "#/$defs/sha256"
-        },
-        "ManifestUrl": {
-          "type": "string",
-          "pattern": "^https://raw\\.githubusercontent\\.com/CrystalxSLY/beydosh-updates/[0-9a-f]{40}/updates/stable/(0|[1-9][0-9]*)\\.(0|[1-9][0-9]*)\\.(0|[1-9][0-9]*)/manifest\\.beydosh\\.json$"
         },
         "CreatedAtUtc": {
           "type": "string",
