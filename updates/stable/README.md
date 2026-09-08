@@ -1,7 +1,11 @@
 # Stable channel
 
-This directory is intentionally inactive.
+The supported update format is `beydosh-signed-plain-v2`: signed, unencrypted packages with no AES-key requirement.
 
-There is no `latest.beydosh.json`, so a correctly implemented launcher reports no verified update and performs no download or installation. The first stable index may be created only after the release gate in [the publishing policy](../../docs/PUBLISHING.md) is complete.
+At this documentation revision, `latest.beydosh.json` is absent. An exact HTTP 404 for that index means **channel not published**, not “installed version verified current.” Network failures and invalid metadata are separate states. This README never substitutes for signed channel metadata.
 
-Published version directories are immutable and use the normalized form `<major>.<minor>.<patch>`. No version directory may be replaced or removed.
+The installed development baseline is 0.9.0; 0.9.1 is the next intended authorized in-app update test. Follow [Publishing](../../docs/PUBLISHING.md): immutable assets must be accessible and verified, then publish the exact signed version manifest, and activate Latest **last**.
+
+Published version directories use normalized `<major>.<minor>.<patch>` names and remain immutable. Do not replace or remove them, reuse asset identities, introduce unsigned placeholders or enable encrypted-v1 fallback.
+
+Updating this documentation does not activate the channel, publish an application update or grant Customer/Legal/public-product approval.
