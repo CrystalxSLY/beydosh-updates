@@ -1,27 +1,40 @@
 # Beydosh Update Channel
 
-This public repository is the metadata channel for verified Beydosh desktop updates.
+This public repository provides signed metadata and GitHub Release assets for Beydosh desktop updates.
 
-## Current state
+## Current update path
 
-**No update is published.** The stable index `updates/stable/latest.beydosh.json` intentionally does not exist. A missing, unreachable, stale, malformed, unsigned, or untrusted index must be treated as “no update available” (fail closed).
+The installed development baseline is **0.9.0**. The next intended update-test version is **0.9.1**, using the installed 0.9.0 launcher. These are owner-authorized development builds, not a public final 1.0.0 or Customer/Legal release.
 
-The repository contains only schemas, publishing guidance, and clearly marked unpublished templates. It contains no application binaries, customer data, private source code, credentials, encryption keys, or signing keys.
+The supported format is **`beydosh-signed-plain-v2`**: signed, unencrypted update packages. No AES key, decryption-key provisioning, or encrypted-v1 fallback is required or accepted.
+
+The application requests metadata through its installed, receipt-verified launcher. The launcher verifies the channel and performs download, integrity checking, staging, activation and restart/health handling. The application does not obtain private signing keys. Update functionality belongs to the application workstream; installer work packages the compatible application, launcher and maintenance components.
+
+## Channel state is not a success claim
+
+At this documentation revision, no `updates/stable/latest.beydosh.json` is present. Publication must be determined from the signed live index, not from this README.
+
+- An exact index HTTP 404 means **channel not published**. It does not prove that the installed app is current.
+- Network unavailability is an availability error, not “up to date.”
+- Invalid, unsigned, stale, malformed or untrusted metadata is rejected; it must not be shown as verified current.
+- Only a valid signed index and its exact referenced signed manifest can establish current/update-available status.
 
 ## Stable layout
 
-- `updates/stable/latest.beydosh.json`: signed stable-channel index; created only for an approved release.
-- `updates/stable/<version>/manifest.beydosh.json`: immutable signed manifest for one version.
-- GitHub Release assets: immutable encrypted chunks, each at most 52,428,800 bytes (50 MiB).
-- `schemas/`: strict JSON schemas for the signed index and manifest.
-- `templates/UNPUBLISHED-NOT-A-RELEASE/`: examples that are deliberately invalid as live release documents.
+- `updates/stable/latest.beydosh.json`: signed stable-channel index; changed **last**.
+- `updates/stable/<version>/manifest.beydosh.json`: immutable signed version manifest.
+- GitHub Release assets: immutable signed-plain-v2 `*.bupd` transport chunks, at most 52,428,800 bytes (50 MiB) each.
 
-Published version folders and Release assets are append-only. They are never deleted, replaced, or reused for another build.
+Version folders, tags and published asset identities must not be reused for different bytes. There is no second `current` or version-list source of truth.
 
-## Trust model
+**Legacy scaffolding warning:** the current files under `schemas/` and `templates/UNPUBLISHED-NOT-A-RELEASE/` were created for the former encrypted-v1 contract. They are not v2 validators or publishable metadata. Regenerate and validate them against the actual v2 parser before using them in a release workflow. This documentation update does not change schemas, examples or live release files.
 
-Authenticity comes from a trusted NIST P-256 public key, signatures over the canonical payload bytes, SHA-256 hashes, strict URL validation, ordered chunk metadata, and anti-downgrade state in the launcher. Private signing keys and decryption keys must never be stored here or embedded as repository secrets.
+## Trust and release scope
 
-Encryption does not prevent analysis of client code: a client that can run an update must eventually decrypt it. Encryption can protect transport artifacts, but signatures and hashes establish authenticity and integrity.
+NIST P-256 signatures, pinned public trust, SHA-256, strict inventories and URL/version/replay checks establish authenticity and integrity. The installed trust document's `Production` purpose selects the regular cryptographic verifier; it does not confer Customer, Legal or public-release approval.
 
-See [Publishing](docs/PUBLISHING.md) for the gated release procedure. Until that procedure is approved and completed, the channel remains intentionally empty.
+The local installer is classified **LOCAL OWNER DEVELOPMENT CANDIDATE**. Persistent owner-managed keys authorize that development workflow; they do not establish Product provenance independent of the local build caller, Authenticode trust or SmartScreen reputation. The installer retains transparent Draft-EULA acknowledgment.
+
+Only the approved release-signing role signs normal updates. The recovery role is pretrusted publicly but its private key is not used in normal publishing. Private keys, credentials, key-storage paths, customer data and source archives must never enter this repository, release assets or logs. Unencrypted compiled update payloads are intentional in v2.
+
+See [Publishing](docs/PUBLISHING.md) for the controlled owner-development release procedure and the separate public-distribution boundary.
