@@ -1,56 +1,67 @@
-# Publishing: signed-plain-v2 owner-development updates
+# Veröffentlichung: signed-plain-v2
 
-This repository is an append-only update channel, not an automatic deployment target. Editing documentation does not sign, publish or activate an update.
+[Übersicht](../README.md) · [Kanalstruktur](../updates/stable/README.md) · [Aktueller Nachweis](releases/0.9.54-publication.md)
 
-## Authorization and scope
+Stand: 22.09.2026, aktiver Owner-Development-Release 0.9.54. Dieses Repository ist kein automatisches Deployment-Ziel. Eine Dokumentationsänderung baut, signiert oder aktiviert keine Anwendung.
 
-The current baseline is 0.9.0; 0.9.1 is the next intended in-app update test. A locally authorized development installer and a specifically authorized GitHub update test are distinct actions. Building a UI fix does not by itself authorize uploading assets or changing stable Latest.
+## Freigabe und Verantwortung
 
-Before a remote update test, record explicit owner authorization for the exact source/payload version, signing role, repository/channel and activation step. A specifically authorized owner-development GitHub test does not constitute Customer, Legal, Live-business or final public-product approval.
+Vor einem Update die ausdrückliche Autorisierung für Quellstand, Version, Repository/Kanal und Aktivierung dokumentieren. Ein Entwicklungsupdate ist keine Customer-, Legal-, Live-Business- oder finale öffentliche Produktfreigabe. Live-Verkauf und echte Bestellungen bleiben gesondert gesperrt.
 
-Product/Customer/Legal publisher gates remain separate and closed unless their own requirements are met. The Draft EULA remains a draft. Owner-managed signing does not claim independent Product provenance, Authenticode certification or Windows publisher reputation.
+Passende automatisierte Tests ausführen und tatsächliche Ergebnisse festhalten. Ein nicht durchgeführter Installationstest bleibt offen. Funktionstests nicht als unabhängiges „QA-PASS“ ausgeben. Die Draft-EULA sowie gegebenenfalls erforderliche Authenticode-/Clean-Windows-Nachweise bleiben eigenständige Grenzen.
 
-Run relevant functional self-tests and record actual results. Do not automatically commission independent update QA or label functional self-tests “QA-PASS.” Installation/update/restart evidence must be reported honestly; an unperformed end-to-end test remains outstanding.
+## Kontrollierter Build- und Signierpfad
 
-## Build and signing contract
+Die folgenden Werkzeuge gehören zum Anwendungs-/Operatorprojekt, **nicht zu diesem öffentlichen Kanalrepository**. Sie sind keine Endnutzeranleitung und ersetzen keine Freigabe.
 
-1. Build the exact committed application payload with compatible installed-launcher contracts. For the intended 0.9.1 test, require launcher 0.9.0 or the actual verified minimum. Preserve signature, inventory, replay/downgrade, atomic activation, readiness/health and rollback checks.
-2. Package only `beydosh-signed-plain-v2`. Reject encrypted v1, unknown formats and unsigned fallbacks. No AES/decryption key is part of this path.
-3. Use only the approved persistent release-signing role and its pinned public identity. Keep private material outside repositories, payloads and logs. The private recovery key is never used for normal build/signing.
-4. Sign canonical Latest and manifest payloads with NIST P-256. Latest binds the exact signed manifest bytes by SHA-256; the trusted KeyId must agree.
-5. Keep signing and publication explicit. The existing generic `pack-remote` primitive is not by itself a fully authorized owner-release pipeline. The owner tool's `sign-base` operation signs an embedded local package, not a remote-v2 release. Establish the controlled, fixed-role remote invocation/adapter before using it; do not infer its existence from the installer build.
-6. Build in isolated staging. A package builder may write a local Latest file; this must not accidentally modify an active release checkout.
+1. Exakten Quellcommit festlegen; fachliche Regressionstests ausführen und in einem isolierten sauberen Checkout bauen.
+2. Kompatiblen App-/Launcher-Maintenance-Payload mit `ops/setup/Build-LauncherMaintenance.ps1 -Version <version>` erzeugen.
+3. Maintenance-Komponenten durch die autorisierte Operatorrolle mit `sign-launcher-maintenance-parent-version` signieren; Payload mit `Complete-LauncherMaintenancePayload.ps1` vervollständigen.
+4. `Test-LauncherMaintenanceStartup.ps1` auf den konkreten Build anwenden.
+5. Den kontrollierten Operatorbefehl ausführen:
 
-No private keys, credentials, private key-storage paths, source archives or real customer data may be included in GitHub content or logs. Compiled plaintext payload bytes are expected in v2 and do not constitute a missing-encryption error.
+   `Beydosh.OwnerDevelopment.TrustTool pack-remote <canonical-app-payload> <new-local-output-root> <version> <40-character-source-commit> <patch-notes-file>`
 
-## v2 transport and manifest
+   Bei DLL-Aufruf wird die Operator-DLL über `dotnet` gestartet. Der feste Adapter bindet den autorisierten Release-Schlüssel, den Kanal und signed-plain-v2; er ist kein Freibrief für andere Rollen oder Ziele. Bereits existierende Ausgabewurzeln werden nicht überschrieben.
 
-Each chunk begins with the exact ASCII header:
+6. Inventar, Versions-/Commitmetadaten, unerwünschte Dateien, Schlüsselidentität und alle Signaturen/Hashes prüfen. Private Recovery-Schlüssel werden nicht verwendet.
+7. Signiertes isoliertes Staging testen: Authentizität, Manipulationsablehnung, atomare Aktivierung, Receipt, Startbereitschaft und einschlägige Fehler-/Rollbackfälle. Erwartete PASS-Marker und Testanzahl verlangen, nicht nur Prozess-Exit 0.
+
+`sign-base` für eingebettete lokale Pakete ist kein Ersatz für den Remote-v2-Build. Private Schlüssel bleiben außerhalb von Repository, Paketen und Logs. Keine Credentials, Kundendaten, Quellcodearchive oder Preview-/Testprogramme veröffentlichen.
+
+## Kryptografischer Vertrag
+
+Ausschließlich `beydosh-signed-plain-v2`: signiert und unverschlüsselt. Kein AES-Schlüssel, kein encrypted-v1-Fallback, kein unsigned-Fallback. NIST P-256 und SHA-256 werden mit gepinnter öffentlicher Vertrauensidentität kombiniert. Latest bindet die exakten signierten Manifestbytes per SHA-256; die vertrauenswürdige KeyId muss passen.
+
+Jeder Transportchunk beginnt mit dem ASCII-Header:
 
 `BUPD|2|signed-plain|<version>|<index>|<total>|`
 
-Index is zero-based; chunk filenames are one-based, beginning with `00001.bupd`. Plain archive bytes follow the header. Transport and plain chunks remain bounded to 50 MiB.
+Der Index ist nullbasiert, Dateinamen sind einsbasiert (`00001.bupd`). Archivbytes folgen dem Header. Transport- und Plain-Chunks bleiben auf jeweils höchstens 50 MiB begrenzt.
 
-The manifest binds version, release ID, source commit, UTC time, trusted KeyId, MinimumLauncher, Windows/x64 compatibility and `Compatibility.PackageFormat = "beydosh-signed-plain-v2"`. It also binds ordered chunk URLs, `PlainBytes`/`TransportBytes`, `PlainSha256`/`TransportSha256`, `TotalPlainBytes`, `TotalTransportBytes`, `TotalTransportSha256`, exact payload inventory and rollback/security metadata. The total transport hash covers exact transport chunks concatenated in ascending index order.
+Das Manifest bindet Version, Release-ID, Quellcommit, UTC-Zeit, KeyId, MinimumLauncher, Plattform, PackageFormat, geordnete URLs, Plain-/Transportgrößen und -Hashes, Gesamtgrößen/-Hashes, exaktes Dateiinventar sowie Rollback-/Sicherheitsmetadaten. Der Gesamttransporthash bezieht sich auf die in Indexreihenfolge verketteten exakten Transportbytes.
 
-Optional signed `PatchNotes` contain at most 100 plain-text lines of at most 1000 characters each. No dynamic HTML. Unknown fields and incompatible documents remain rejected by the actual client parser.
+Optionale signierte PatchNotes: höchstens 100 Klartextzeilen mit jeweils höchstens 1000 Zeichen, kein dynamisches HTML. Der echte Parser bleibt strikt; unbekannte Felder und inkompatible Dokumente werden abgelehnt. Die [Alt-Schemas](../schemas/README.md) und [Altvorlagen](../templates/UNPUBLISHED-NOT-A-RELEASE/README.md) sind keine v2-Validatoren.
 
-The repository's existing encrypted-v1 schemas/templates are legacy scaffolding, not authoritative v2 validators. Align and test them against the shipping parser before release use; never publish their placeholder signatures or example metadata.
+## Unveränderliche Veröffentlichung, Latest zuletzt
 
-## Immutable publication order
+1. Autorisierung, Quellcommit, Version, Tests, Build und lokale Signier-/Stagingnachweise festhalten.
+2. Versions-/Tag-/Assetkollisionen ausschließen. Keine bereits veröffentlichten Bytes ersetzen.
+3. Chunks unter Release-Tag `v<version>` hochladen. Im autorisierten Owner-Development-Pfad als Prerelease veröffentlichen; ein privater Draft-Link ist kein öffentlicher Verfügbarkeitsnachweis.
+4. Pakete über ihre endgültigen URLs unter `https://github.com/CrystalxSLY/beydosh-updates/releases/download/v<version>/` herunterladen und Länge/Hashes gegen die signierten lokalen Bytes prüfen.
+5. Das signierte Manifest unter `updates/stable/<version>/manifest.beydosh.json` committen; exakt veröffentlichte Bytes erneut herunterladen und prüfen.
+6. Signierten Index gegen Manifest und aktuellen erwarteten Vorgänger prüfen. `updates/stable/latest.beydosh.json` **zuletzt** aktualisieren. Bei parallel geändertem Vorgänger stoppen und neu prüfen, nicht überschreiben.
+7. Öffentlichen Index über den unveränderlichen Aktivierungscommit herunterladen und Byte-/Signaturbindung prüfen. Manifest-/Aktivierungscommits, Assetstatus und Hashes dokumentieren.
+8. Einen ausdrücklich autorisierten realen Installationstest getrennt durchführen und protokollieren. Isoliertes Staging belegt nicht automatisch den Neustart einer konkreten Nutzerinstallation.
 
-1. Record authorization; build, inspect, test and sign the exact version in isolated staging.
-2. Refuse collisions with existing version folders, tags or assets. Prepare the immutable chunks and signed manifest.
-3. Upload the version's assets to a release tagged `v<version>`. Make the authorized release assets accessible at their final HTTPS URLs before activating Latest. A private draft URL is not a successful public-client availability check.
-4. Fetch the final assets through the intended client access path and verify their lengths and hashes. URLs must remain under `https://github.com/CrystalxSLY/beydosh-updates/releases/download/v<version>/`.
-5. Commit the verified signed manifest at `updates/stable/<version>/manifest.beydosh.json`; retrieve and verify its exact final bytes.
-6. Validate the signed index against that manifest, then create or update `updates/stable/latest.beydosh.json` **as the final channel-activation step**.
-7. Observe the authorized real 0.9.0-to-0.9.1 in-app update, shutdown handoff, activation, restart/readiness and relevant failure behavior. Record what actually happened; this documentation does not claim the test passed.
+Fehler vor der Aktivierung lassen den bisherigen Latest unverändert. Ein Fehler nach Aktivierung erlaubt keinen stillen Indexrücksprung, kein Asset-Ersetzen und keinen Sicherheitsbypass.
 
-A failure before activation leaves the previous Latest unchanged. An activation or runtime failure must not trigger ad-hoc index rollback, asset replacement, silent downgrade or removal of published versions; follow a separately authorized recovery procedure.
+## Wiederherstellung und Freigabegrenzen
 
-## Rollback and future public distribution
+Lokaler transaktionaler Rollback nach einem fehlgeschlagenen Start unterscheidet sich von einem veröffentlichten Remote-Downgrade. Recovery braucht eigene Autorisierung und muss Highest-Seen-/Anti-Replay-/Previous-Manifest-Regeln erfüllen. Das aktuelle 0.9.54-Manifest kennzeichnet Remote-Rollback als `blocked`; ein synthetischer Staging-Rollback ist damit nicht gleichzusetzen.
 
-Local transactional rollback after failed activation/start is distinct from publishing a downgrade. Remote downgrade/recovery metadata must obey the launcher's highest-seen and previous-manifest rules and needs explicit authorization; it cannot bypass anti-replay state.
+Die Trust-Bezeichnung `Production` wählt einen kryptografischen Verifier, keine fachliche oder rechtliche Freigabe. Owner-Schlüssel begründen keine vom lokalen Builder unabhängige Produktprovenienz und keine Authenticode-/SmartScreen-Reputation.
 
-Final public-product/customer distribution retains its separate signing/release authority, legally approved EULA, supported clean-Windows validation and any required Authenticode process. A successful owner-development update test is evidence for that later work, not a substitute for those approvals.
+## Dokumentationsänderungen
+
+Nur Markdown ändern, relative Links und Versionsangaben prüfen und die Unverändertheit aller übrigen Dateien nachweisen. Keine Versionsanhebung, Neuunterzeichnung, Tags, Release-Assets oder Latest-Änderung allein für Dokumentation. Historische Berichte behalten ihren zeitlichen Geltungsbereich.

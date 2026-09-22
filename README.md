@@ -1,40 +1,44 @@
 # Beydosh Update Channel
 
-This public repository provides signed metadata and GitHub Release assets for Beydosh desktop updates.
+Öffentlicher Kanal für signierte Updates der Beydosh-Windows-Anwendung. Dieses Repository enthält Update-Metadaten, Dokumentation und Verweise auf Pakete, nicht den Anwendungsquellcode.
 
-## Current update path
+## Aktueller Stand
 
-The installed development baseline is **0.9.0**. The next intended update-test version is **0.9.1**, using the installed 0.9.0 launcher. These are owner-authorized development builds, not a public final 1.0.0 or Customer/Legal release.
+Dokumentationsstand: **22. September 2026**. Im signierten Kanal ist **0.9.54** aktiviert. Die GitHub-Veröffentlichung ist ein **Owner-Development-Prerelease**, keine Freigabe für Live-Verkauf oder eine fertig abgenommene öffentliche Produktversion. Der Verzeichnisname `stable` ändert diese Einordnung nicht.
 
-The supported format is **`beydosh-signed-plain-v2`**: signed, unencrypted update packages. No AES key, decryption-key provisioning, or encrypted-v1 fallback is required or accepted.
+Maßgeblich ist immer der vom Launcher verifizierte [signierte Kanalindex](updates/stable/latest.beydosh.json), nicht diese Versionsangabe. [Release 0.9.54](https://github.com/CrystalxSLY/beydosh-updates/releases/tag/v0.9.54) enthält das Update-Paket.
 
-The application requests metadata through its installed, receipt-verified launcher. The launcher verifies the channel and performs download, integrity checking, staging, activation and restart/health handling. The application does not obtain private signing keys. Update functionality belongs to the application workstream; installer work packages the compatible application, launcher and maintenance components.
+## Dokumentation
 
-## Channel state is not a success claim
+- [Bedienung: Update, Import, Währungen, Märkte, Versand und KI](docs/USER_GUIDE.md)
+- [Fehlerhilfe und bekannte Grenzen](docs/TROUBLESHOOTING.md)
+- [Vollständige Versionshistorie 0.9.1–0.9.54](docs/CHANGELOG.md)
+- [Veröffentlichung und kryptografischer Update-Vertrag](docs/PUBLISHING.md)
+- [Kanalstruktur](updates/stable/README.md)
+- [Nachweise und Grenzen der Veröffentlichung 0.9.54](docs/releases/0.9.54-publication.md)
+- [Historischer Owner-Test 0.9.1](docs/releases/0.9.1-owner-test.md)
 
-At this documentation revision, no `updates/stable/latest.beydosh.json` is present. Publication must be determined from the signed live index, not from this README.
+## Update installieren
 
-- An exact index HTTP 404 means **channel not published**. It does not prove that the installed app is current.
-- Network unavailability is an availability error, not “up to date.”
-- Invalid, unsigned, stale, malformed or untrusted metadata is rejected; it must not be shown as verified current.
-- Only a valid signed index and its exact referenced signed manifest can establish current/update-available status.
+In einer kompatibel installierten Beydosh-Anwendung **„Nach Aktualisierung suchen“** verwenden und dem angebotenen Update folgen. Der installierte Launcher prüft Signaturen, lädt Pakete, prüft deren Integrität und führt Staging, Aktivierung und Neustart aus.
 
-## Stable layout
+Das aktuelle Paket richtet sich an **Windows x64**, setzt mindestens Launcher **0.9.0** voraus und ist ein frameworkabhängiger .NET-9-Windows-Build. Eine passende .NET-Desktop-Runtime ist erforderlich. `.bupd`-Dateien sind Transportpakete, **keine direkt ausführbaren Installationsprogramme**. Dieses Repository bietet keinen eigenständigen Erstinstallations-Download an.
 
-- `updates/stable/latest.beydosh.json`: signed stable-channel index; changed **last**.
-- `updates/stable/<version>/manifest.beydosh.json`: immutable signed version manifest.
-- GitHub Release assets: immutable signed-plain-v2 `*.bupd` transport chunks, at most 52,428,800 bytes (50 MiB) each.
+Für bestehende Produkte ohne bekannte EK-Währung: Quelldaten unter „Daten bearbeiten“ öffnen, die tatsächliche **EK-Währung der Quelldaten** wählen und erneut importieren. Seit 0.9.54 werden eindeutig zugeordnete, bereits importierte Produkte wieder ausgewählt. Details und Schutzgrenzen stehen in der Bedienungsanleitung.
 
-Version folders, tags and published asset identities must not be reused for different bytes. There is no second `current` or version-list source of truth.
+## Vertrauen und Sicherheit
 
-**Legacy scaffolding warning:** the current files under `schemas/` and `templates/UNPUBLISHED-NOT-A-RELEASE/` were created for the former encrypted-v1 contract. They are not v2 validators or publishable metadata. Regenerate and validate them against the actual v2 parser before using them in a release workflow. This documentation update does not change schemas, examples or live release files.
+Verwendet wird ausschließlich **`beydosh-signed-plain-v2`**: signiert, aber bewusst nicht verschlüsselt. Kein AES-Schlüssel und kein encrypted-v1-Fallback. NIST-P-256-Signaturen, fest hinterlegte öffentliche Vertrauensschlüssel, SHA-256, genaue Dateiinventare sowie Versions-, URL- und Replay-Prüfungen sichern den Updatepfad.
 
-## Trust and release scope
+Eine gültige Signatur bestätigt Herkunft innerhalb dieses Vertrauensmodells und Integrität. Sie bestätigt weder fachliche Fehlerfreiheit noch Authenticode/SmartScreen-Reputation oder rechtliche Freigaben. Die Trust-Zweckbezeichnung `Production` ist keine Customer-/Legal-Freigabe.
 
-NIST P-256 signatures, pinned public trust, SHA-256, strict inventories and URL/version/replay checks establish authenticity and integrity. The installed trust document's `Production` purpose selects the regular cryptographic verifier; it does not confer Customer, Legal or public-release approval.
+- Index-HTTP-404 bedeutet „Kanal nicht veröffentlicht“, nicht „aktuell“.
+- Netzfehler bedeuten „nicht prüfbar“, nicht „aktuell“.
+- Ungültige, unvollständige oder nicht vertrauenswürdige Metadaten werden abgelehnt.
+- Veröffentlichte Versionsmanifeste, Tags und Paketbytes werden nicht durch andere Inhalte ersetzt. Latest wird bei einem neuen Update zuletzt geändert.
 
-The local installer is classified **LOCAL OWNER DEVELOPMENT CANDIDATE**. Persistent owner-managed keys authorize that development workflow; they do not establish Product provenance independent of the local build caller, Authenticode trust or SmartScreen reputation. The installer retains transparent Draft-EULA acknowledgment.
+Die [Schemas](schemas/README.md) und [Vorlagen](templates/UNPUBLISHED-NOT-A-RELEASE/README.md) stammen aus dem früheren encrypted-v1-Vertrag und sind **keine gültigen v2-Validatoren**.
 
-Only the approved release-signing role signs normal updates. The recovery role is pretrusted publicly but its private key is not used in normal publishing. Private keys, credentials, key-storage paths, customer data and source archives must never enter this repository, release assets or logs. Unencrypted compiled update payloads are intentional in v2.
+Private Schlüssel, Zugangsdaten, Kundendaten und Quellcodearchive gehören weder in dieses Repository noch in Release-Assets oder Logs. Live-Verkauf, echte Bestellungen und reale Kundendatennutzung bleiben bis zu gesondert dokumentierter Freigabe gesperrt.
 
-See [Publishing](docs/PUBLISHING.md) for the controlled owner-development release procedure and the separate public-distribution boundary.
+Eine reine Dokumentationsänderung veröffentlicht keine neue App-Version und verändert keine signierten Update-Dateien.
