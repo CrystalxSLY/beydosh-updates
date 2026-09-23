@@ -2,7 +2,7 @@
 
 [Übersicht](../README.md) · [Bedienung](USER_GUIDE.md)
 
-Stand: 0.9.54. Bei Problemen zuerst installierte Version, betroffenen Bereich und genaue Statusmeldung festhalten. Screenshots vor dem Teilen auf Zugangsdaten und persönliche Daten prüfen.
+Stand: 0.9.56. Bei Problemen zuerst installierte Version, betroffenen Bereich und genaue Statusmeldung festhalten. Screenshots vor dem Teilen auf Zugangsdaten und persönliche Daten prüfen.
 
 ## Markt aktiv, aber kein Verkaufspreis
 
@@ -65,4 +65,14 @@ Keine Pakete, Vertrauensdateien oder Installationsreceipts manuell ersetzen. Die
 
 ## Aussagegrenzen
 
-Automatisierte Tests und isoliertes signiertes Staging sind keine vollständige manuelle Prüfung der Benutzerinstallation. Die 0.9.54-Nachweise umfassen keine reale Neuimport-Prüfung sämtlicher Nutzerdaten. Bekannte Sicherheits-/Fachgrenzen dürfen nicht durch pauschale Aussagen wie „alle Produkte funktionieren garantiert“ ersetzt werden.
+### Brutto, Steuer und Rechenreihe
+
+Die neue Kalkulationsreihe ist eine Erklärung der ausgewählten Regel, kein zusätzlicher Preisaufschlag. Steuer nicht ein zweites Mal in Formel oder Zusatzkosten eintragen. Bei einer unerwarteten Abweichung zuerst EK-Steuerbasis, TaxPercent, Gebührenbasis und Rundung prüfen. Lange Reihen seitlich scrollen; für Zahlenwerte den Rechenweg eines Beispielprodukts öffnen.
+
+### Alte ID wird beim Wiederimport nicht übernommen
+
+Bei „ID-Reservierung fehlgeschlagen“ unter 0.9.55 zuerst auf 0.9.56 aktualisieren und die Daten erneut öffnen. Der behobene Fehler konnte bei einem uneindeutigen gelöschten Produkt die komplette Auswahl blockieren. In 0.9.56 steht der konkrete Konflikt an der gesperrten Zeile; andere eindeutige Zeilen bleiben reservierbar. Produktkennungen nicht wahllos ändern und keine weiteren Produkte als Umgehung löschen.
+
+Lieferantenbezug und zugeordnete Kennungen prüfen. EAN/GTIN allein benötigt eine gültige Prüfziffer. Widersprüchliche Kennungen, mehrere Treffer oder eine noch aktive andere Identität sperren die automatische Wiederherstellung. Fehlt eine für alte Löschungen benötigte Sicherung, den Nachweis wiederherstellen statt eine ID manuell zu erzwingen.
+
+Automatisierte Tests und isoliertes signiertes Staging sind keine vollständige manuelle Prüfung der Benutzerinstallation. Die Nachweise umfassen keine reale Neuimport-Prüfung sämtlicher Nutzerdaten oder Bestätigung individueller Marktgebühren. Bekannte Sicherheits-/Fachgrenzen dürfen nicht durch pauschale Aussagen wie „alle Produkte funktionieren garantiert“ ersetzt werden.

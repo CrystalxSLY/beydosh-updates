@@ -2,9 +2,36 @@
 
 [Übersicht](../README.md) · [Bedienung](USER_GUIDE.md)
 
-Stand: 22.09.2026. Vollständige Liste der 54 vorhandenen Versionsmanifeste (0.9.1–0.9.54). Die folgenden Änderungsangaben werden aus deren `PatchNotes` wiedergegeben. Sie beschreiben den jeweiligen Entwicklungsstand, keine unabhängige QA- oder Live-Freigabe. Spätere Versionen können frühere Abläufe ersetzen; für die aktuelle Bedienung gilt die Anleitung.
+Stand: 23.09.2026. Vollständige Liste der 56 vorhandenen Versionsmanifeste (0.9.1–0.9.56). Die folgenden Änderungsangaben werden aus deren `PatchNotes` wiedergegeben. Sie beschreiben den jeweiligen Entwicklungsstand, keine unabhängige QA- oder Live-Freigabe. Spätere Versionen können frühere Abläufe ersetzen; für die aktuelle Bedienung gilt die Anleitung.
 
 Zeitangaben unten sind die UTC-Erstellungszeit der signierten Metadaten, nicht zwingend die GitHub-Veröffentlichungszeit. Maßgeblich für die aktivierte Version ist der signierte Kanalindex.
+
+## 0.9.56
+
+Metadaten erstellt: 2026-09-23T19:00:05.3491027+00:00 · [Manifest](../updates/stable/0.9.56/manifest.beydosh.json) · [GitHub-Release](https://github.com/CrystalxSLY/beydosh-updates/releases/tag/v0.9.56)
+
+- Beydosh 0.9.56 – Visuelle Kalkulationsreihe
+- Bei Auswahl eines Verkaufskanals erscheinen seine Preisregeln als waagerechte Rechenreihe von EK bis VK brutto.
+- Pfeile, Plus, Minus, Multiplikation, Division und Klammern machen die tatsächliche Berechnungsreihenfolge sichtbar; lange Reihen sind seitlich scrollbar.
+- Gewinnmodell, Gebührenbasis, Verkaufssteuer, Währungsumrechnung und abschließende Rundung stammen aus der jeweiligen Regel, ohne feste Anbieter- oder Gewinnvorgaben.
+- Die Preisregel-Beispielrechnung zeigt dieselbe Reihe; geänderte Eingaben blenden veraltete Ergebnisse bis zur Neuberechnung aus.
+- Enthält alle Verbesserungen aus 0.9.55. Keine Änderung bestehender Preisregeln und keine automatische Veröffentlichung auf Verkaufsplattformen.
+- Behebt den Importabbruch bei uneindeutiger Wiedererkennung gelöschter Produkte: problematische Zeilen bekommen einen konkreten Hinweis; unabhängige eindeutige Zeilen können weiter reserviert und importiert werden.
+- Zusätzliche passende SKU-/Artikelkennungen können eine mehrfach vorhandene EAN eindeutig zuordnen; widersprüchliche Identitäten bleiben gesperrt.
+- Owner-Preview; konkrete Gebühren, Steuerstatus und tatsächliche Produktpreise weiterhin prüfen.
+
+## 0.9.55
+
+Metadaten erstellt: 2026-09-23T18:43:29.8767223+00:00 · [Manifest](../updates/stable/0.9.55/manifest.beydosh.json) · [GitHub-Release](https://github.com/CrystalxSLY/beydosh-updates/releases/tag/v0.9.55)
+
+- Beydosh 0.9.55
+- Große Produktlöschungen laufen im Hintergrund mit Ladeanzeige, Schutz gegen Doppelklicks und vorheriger Sicherung.
+- Einheitliche Ladehinweise für neuere Import-, Markt-, Versand-, KI- und Dateiaktionen ergänzt.
+- Beim erneuten Öffnen gespeicherter Importdaten sind bereits reservierte Beydosh-IDs sofort sichtbar.
+- Wiederimport gelöschter Produkte kann die bisherige Beydosh-ID anhand eindeutiger, lieferantenbezogener Identitätsmerkmale wiederherstellen. Widersprüche und Mehrdeutigkeiten werden gesperrt; IDs werden niemals allgemein recycelt.
+- Verkaufskanal-Preise sind ausdrücklich als Brutto-Endpreise gekennzeichnet. Der Rechenweg zeigt Netto, enthaltene Verkaufssteuer und Endpreis. Vorhandene Steuersätze werden nicht automatisch verändert.
+- Die Märkte-KI klärt unklare Netto-/Brutto-Vorgaben und Steuergrundlagen, unterscheidet Verkaufssteuer von Gebührensteuer und berücksichtigt, dass der Import nur Währungen umrechnet.
+- Owner-Preview: keine Freigabe für Live-Verkäufe, Bestellungen oder automatische Veröffentlichungen. Gebühren, Steuerstatus und tatsächliche Produktpreise vor Nutzung prüfen.
 
 ## 0.9.54
 

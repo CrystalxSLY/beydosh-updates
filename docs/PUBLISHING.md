@@ -1,8 +1,8 @@
 # Veröffentlichung: signed-plain-v2
 
-[Übersicht](../README.md) · [Kanalstruktur](../updates/stable/README.md) · [Aktueller Nachweis](releases/0.9.54-publication.md)
+[Übersicht](../README.md) · [Kanalstruktur](../updates/stable/README.md) · [Aktueller Nachweis](releases/0.9.56-publication.md)
 
-Stand: 22.09.2026, aktiver Owner-Development-Release 0.9.54. Dieses Repository ist kein automatisches Deployment-Ziel. Eine Dokumentationsänderung baut, signiert oder aktiviert keine Anwendung.
+Stand: 23.09.2026, aktiver Owner-Development-Release 0.9.56. Dieses Repository ist kein automatisches Deployment-Ziel. Eine Dokumentationsänderung baut, signiert oder aktiviert keine Anwendung.
 
 ## Freigabe und Verantwortung
 
@@ -58,7 +58,7 @@ Fehler vor der Aktivierung lassen den bisherigen Latest unverändert. Ein Fehler
 
 ## Wiederherstellung und Freigabegrenzen
 
-Lokaler transaktionaler Rollback nach einem fehlgeschlagenen Start unterscheidet sich von einem veröffentlichten Remote-Downgrade. Recovery braucht eigene Autorisierung und muss Highest-Seen-/Anti-Replay-/Previous-Manifest-Regeln erfüllen. Das aktuelle 0.9.54-Manifest kennzeichnet Remote-Rollback als `blocked`; ein synthetischer Staging-Rollback ist damit nicht gleichzusetzen.
+Lokaler transaktionaler Rollback nach einem fehlgeschlagenen Start unterscheidet sich von einem veröffentlichten Remote-Downgrade. Recovery braucht eigene Autorisierung und muss Highest-Seen-/Anti-Replay-/Previous-Manifest-Regeln erfüllen. Das aktuelle 0.9.56-Manifest kennzeichnet Remote-Rollback als `blocked`; ein synthetischer Staging-Rollback ist damit nicht gleichzusetzen.
 
 Die Trust-Bezeichnung `Production` wählt einen kryptografischen Verifier, keine fachliche oder rechtliche Freigabe. Owner-Schlüssel begründen keine vom lokalen Builder unabhängige Produktprovenienz und keine Authenticode-/SmartScreen-Reputation.
 

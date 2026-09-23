@@ -2,7 +2,7 @@
 
 [Zur Übersicht](../README.md) · [Fehlerhilfe](TROUBLESHOOTING.md) · [Versionshistorie](CHANGELOG.md)
 
-Stand: 0.9.54, 22.09.2026. Beschrieben ist der aktuelle Owner-Development-Stand, keine Freigabe für produktiven Handel.
+Stand: 0.9.56, 23.09.2026. Beschrieben ist der aktuelle Owner-Development-Stand, keine Freigabe für produktiven Handel.
 
 ## 1. Aktualisieren und Daten erhalten
 
@@ -65,6 +65,14 @@ Nicht zugeordnete Quellspalten sind kein Auftrag, bestehende Felder zu löschen.
 
 Abwählen oder Entfernen einer Quellzeile löscht nicht automatisch das bereits angelegte Produkt. Explizites Löschen von Produkten/Anhängen und die spätere Erreichbarkeit externer Bildlinks sind davon getrennte Vorgänge.
 
+### Reservierte und wiederhergestellte IDs
+
+Seit 0.9.55 erscheinen bereits reservierte IDs beim erneuten Öffnen unveränderter gespeicherter Importdaten sofort. Ein gelöschtes Produkt kann seine bisherige ID zurückbekommen, wenn es innerhalb desselben Lieferanten anhand Lieferanten-Artikelnummer, SKU oder gültiger EAN/GTIN eindeutig wiedererkannt wird und keine andere vorhandene Kennung widerspricht. Mehrdeutige Treffer werden gesperrt. Alte IDs werden nicht allgemein für andere Produkte freigegeben.
+
+0.9.56 behebt einen Fehler aus 0.9.55: Ein einzelner uneindeutiger Wiederherstellungstreffer brach dort die gesamte ID-Reservierung ab. Jetzt werden solche Zeilen einzeln mit einem konkreten Hinweis gesperrt; unabhängige eindeutige Zeilen erhalten weiterhin IDs und können importiert werden. Zusätzliche passende Kennungen können eine mehrfach vorhandene EAN disambiguieren. Widersprüche werden nicht übergangen. Nach einem Import mit Hinweisen die betroffenen Zeilen prüfen; ein Teilimport ist kein erfolgreicher Import sämtlicher ausgewählter Produkte.
+
+Frühere Löschungen werden aus den ausdrücklich im Löschprotokoll benannten Sicherungen rekonstruiert. Fehlt dieser Nachweis, wird nicht geraten. Wiederhergestellt wird die Identität, nicht automatisch jeder bewusst gelöschte Anhang oder alte Datenstand. Bei großen Löschungen läuft die Verarbeitung im Hintergrund; die Ladeanzeige informiert über die Aktion. Vorher wird weiterhin eine Sicherung erstellt.
+
 ## 4. Verkaufskanäle und Länderpreise
 
 Ein Verkaufskanal beschreibt eine Plattform oder einen Shop. Innerhalb **desselben Kanals** können Länder unterschiedliche Preisregeln und Angebotswährungen erhalten. Für jedes Land einen neuen gleichnamigen Kanal anzulegen ist nicht erforderlich.
@@ -80,6 +88,12 @@ Die Karte zeigt aktiv/inaktiv; bei Aktivierung wechselt der Button zu **„Markt
 Die Länderanzahl umfasst konfigurierte Länder auch bei pausierten Regeln. „0 Länder“ trotz Ländername im Regeltext ist deshalb kein Beweis, dass eine tatsächliche Länderzuordnung gespeichert wurde; die Zuordnung in der Regel prüfen.
 
 ### Kalkulation
+
+Seit 0.9.55 ist der VK ausdrücklich der **Brutto-Endpreis** inklusive des eingetragenen Verkaufssteuersatzes. Der Rechenweg zeigt Netto, Steueranteil und Endpreis getrennt. Vorhandene Steuersätze werden nicht automatisch geändert. Bei zutreffender Steuerbefreiung gibt es keinen pauschalen Verkaufssteueraufschlag; Gebührensteuer ist eine andere Kostenposition. Die alte separate Nettomarktpreis-Tabelle bleibt weiterhin netto bezeichnet.
+
+Der EK muss wirtschaftliche Einkaufskosten darstellen: ohne abziehbare Vorsteuer, aber einschließlich nicht abziehbarer Steuer. Der Import rechnet nur Währungen um, nicht brutto in netto. Steuerstatus, EK-Steuerbasis und zusätzliche Plattform-Steuern beim Checkout müssen zum tatsächlichen Fall passen. Die KI soll unklare Brutto-/Netto-Vorgaben gezielt klären, statt Steuersätze zu erfinden.
+
+Seit 0.9.56 zeigt die Auswahl eines Marktes seine Preisregeln als **waagerechte Kalkulationsreihe von EK bis VK brutto**. Pfeile führen das Zwischenergebnis weiter; Plus, Minus, Multiplikation, Division und Klammern zeigen den jeweiligen Rechenschritt. Die Reihe übernimmt Gewinnmodell, Gebührenbasis, Steuer, Wechselkurs und Rundung aus der Regel. Lange Reihen sind seitlich scrollbar. Die gleiche Ansicht erscheint in KI-Entwürfen und der Preisregel-Beispielrechnung; geänderte Eingaben machen die bisherige Beispielreihe bis zur Neuberechnung ungültig.
 
 Der Markt berechnet deterministisch aus dem gespeicherten EK in Shopwährung. Gewinnmodelle und Gebühren sind konfigurierbar. Prozentuale Gebühren auf den Verkaufspreis müssen aus dem Verkaufspreis zurückgerechnet werden; sie sind nicht einfach derselbe prozentuale Aufschlag auf den EK.
 
