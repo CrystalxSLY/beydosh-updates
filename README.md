@@ -4,18 +4,18 @@
 
 ## Aktueller Stand
 
-Dokumentationsstand: **23. September 2026**. Im signierten Kanal ist **0.9.56** aktiviert. Die GitHub-Veröffentlichung ist ein **Owner-Development-Prerelease**, keine Freigabe für Live-Verkauf oder eine fertig abgenommene öffentliche Produktversion. Der Verzeichnisname `stable` ändert diese Einordnung nicht.
+Dokumentationsstand: **23. September 2026**. Im signierten Kanal ist **0.9.57** aktiviert. Die GitHub-Veröffentlichung ist ein **Owner-Development-Prerelease**, keine Freigabe für Live-Verkauf oder eine fertig abgenommene öffentliche Produktversion. Der Verzeichnisname `stable` ändert diese Einordnung nicht.
 
-Maßgeblich ist immer der vom Launcher verifizierte [signierte Kanalindex](updates/stable/latest.beydosh.json), nicht diese Versionsangabe. [Release 0.9.56](https://github.com/CrystalxSLY/beydosh-updates/releases/tag/v0.9.56) enthält das Update-Paket.
+Maßgeblich ist immer der vom Launcher verifizierte [signierte Kanalindex](updates/stable/latest.beydosh.json), nicht diese Versionsangabe. [Release 0.9.57](https://github.com/CrystalxSLY/beydosh-updates/releases/tag/v0.9.57) enthält das Update-Paket.
 
 ## Dokumentation
 
 - [Bedienung: Update, Import, Währungen, Märkte, Versand und KI](docs/USER_GUIDE.md)
 - [Fehlerhilfe und bekannte Grenzen](docs/TROUBLESHOOTING.md)
-- [Vollständige Versionshistorie 0.9.1–0.9.56](docs/CHANGELOG.md)
+- [Vollständige Versionshistorie 0.9.1–0.9.57](docs/CHANGELOG.md)
 - [Veröffentlichung und kryptografischer Update-Vertrag](docs/PUBLISHING.md)
 - [Kanalstruktur](updates/stable/README.md)
-- [Nachweise und Grenzen der Veröffentlichung 0.9.56](docs/releases/0.9.56-publication.md)
+- [Nachweise und Grenzen der Veröffentlichung 0.9.57](docs/releases/0.9.57-publication.md)
 - [Historischer Owner-Test 0.9.1](docs/releases/0.9.1-owner-test.md)
 
 ## Update installieren

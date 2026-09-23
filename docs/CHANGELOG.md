@@ -2,9 +2,19 @@
 
 [Übersicht](../README.md) · [Bedienung](USER_GUIDE.md)
 
-Stand: 23.09.2026. Vollständige Liste der 56 vorhandenen Versionsmanifeste (0.9.1–0.9.56). Die folgenden Änderungsangaben werden aus deren `PatchNotes` wiedergegeben. Sie beschreiben den jeweiligen Entwicklungsstand, keine unabhängige QA- oder Live-Freigabe. Spätere Versionen können frühere Abläufe ersetzen; für die aktuelle Bedienung gilt die Anleitung.
+Stand: 23.09.2026. Vollständige Liste der 57 vorhandenen Versionsmanifeste (0.9.1–0.9.57). Die folgenden Änderungsangaben werden aus deren `PatchNotes` wiedergegeben. Sie beschreiben den jeweiligen Entwicklungsstand, keine unabhängige QA- oder Live-Freigabe. Spätere Versionen können frühere Abläufe ersetzen; für die aktuelle Bedienung gilt die Anleitung.
 
 Zeitangaben unten sind die UTC-Erstellungszeit der signierten Metadaten, nicht zwingend die GitHub-Veröffentlichungszeit. Maßgeblich für die aktivierte Version ist der signierte Kanalindex.
+
+## 0.9.57
+
+[Manifest](../updates/stable/0.9.57/manifest.beydosh.json) · [GitHub-Release](https://github.com/CrystalxSLY/beydosh-updates/releases/tag/v0.9.57)
+
+- Preisregel-Bearbeitung im selben Verkaufskanal-Fenster, mit Rückkehr zur erhaltenen Karte.
+- Kalkulationsablauf über volle Fensterbreite, automatischer Zeilenumbruch mit Verbindungspfeilen.
+- Numerische Sortierung für EK und Bestand; chronologische Sortierung für Änderungszeitpunkte.
+- Sichtbare Sortierpfeile und Drei-Klick-Zyklus: aufsteigend, absteigend, aufgehoben.
+- Keine Veränderung bestehender Produktpreise oder Preisregeln.
 
 ## 0.9.56
 

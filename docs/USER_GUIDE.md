@@ -2,7 +2,7 @@
 
 [Zur Übersicht](../README.md) · [Fehlerhilfe](TROUBLESHOOTING.md) · [Versionshistorie](CHANGELOG.md)
 
-Stand: 0.9.56, 23.09.2026. Beschrieben ist der aktuelle Owner-Development-Stand, keine Freigabe für produktiven Handel.
+Stand: 0.9.57, 23.09.2026. Beschrieben ist der aktuelle Owner-Development-Stand, keine Freigabe für produktiven Handel.
 
 ## 1. Aktualisieren und Daten erhalten
 
@@ -93,7 +93,7 @@ Seit 0.9.55 ist der VK ausdrücklich der **Brutto-Endpreis** inklusive des einge
 
 Der EK muss wirtschaftliche Einkaufskosten darstellen: ohne abziehbare Vorsteuer, aber einschließlich nicht abziehbarer Steuer. Der Import rechnet nur Währungen um, nicht brutto in netto. Steuerstatus, EK-Steuerbasis und zusätzliche Plattform-Steuern beim Checkout müssen zum tatsächlichen Fall passen. Die KI soll unklare Brutto-/Netto-Vorgaben gezielt klären, statt Steuersätze zu erfinden.
 
-Seit 0.9.56 zeigt die Auswahl eines Marktes seine Preisregeln als **waagerechte Kalkulationsreihe von EK bis VK brutto**. Pfeile führen das Zwischenergebnis weiter; Plus, Minus, Multiplikation, Division und Klammern zeigen den jeweiligen Rechenschritt. Die Reihe übernimmt Gewinnmodell, Gebührenbasis, Steuer, Wechselkurs und Rundung aus der Regel. Lange Reihen sind seitlich scrollbar. Die gleiche Ansicht erscheint in KI-Entwürfen und der Preisregel-Beispielrechnung; geänderte Eingaben machen die bisherige Beispielreihe bis zur Neuberechnung ungültig.
+Seit 0.9.56 zeigt die Auswahl eines Marktes seine Preisregeln als **waagerechte Kalkulationsreihe von EK bis VK brutto**. Pfeile führen das Zwischenergebnis weiter; Plus, Minus, Multiplikation, Division und Klammern zeigen den jeweiligen Rechenschritt. Die Reihe übernimmt Gewinnmodell, Gebührenbasis, Steuer, Wechselkurs und Rundung aus der Regel. Seit 0.9.57 bricht der Ablauf mit Verbindungspfeilen in weitere Zeilen um. Die Preisregel-Bearbeitung bleibt im Verkaufskanal-Fenster und zeigt den Ablauf unten über die gesamte Fensterbreite. Die gleiche Ansicht erscheint in KI-Entwürfen und der Preisregel-Beispielrechnung; geänderte Eingaben machen die bisherige Beispielreihe bis zur Neuberechnung ungültig.
 
 Der Markt berechnet deterministisch aus dem gespeicherten EK in Shopwährung. Gewinnmodelle und Gebühren sind konfigurierbar. Prozentuale Gebühren auf den Verkaufspreis müssen aus dem Verkaufspreis zurückgerechnet werden; sie sind nicht einfach derselbe prozentuale Aufschlag auf den EK.
 
@@ -142,3 +142,7 @@ Anfragen gehen an den konfigurierten KI-Dienst und können Kosten verursachen. V
 ## 8. Grenzen
 
 Kalkulation, lokale Speicherung, Aktivierung einer Preisregel und Veröffentlichung auf einer Plattform sind getrennte Schritte. Das aktuelle System eröffnet durch „Markt aktivieren“ keinen Live-Verkauf und führt keine Bestellungen aus. Rechtliche/steuerliche Angaben bleiben prüfpflichtige Arbeitsunterlagen.
+
+## Produktsortierung
+
+Klick auf eine Spaltenüberschrift: ↑ aufsteigend, ↓ absteigend, dritter Klick hebt die Spaltensortierung auf. Einkaufspreis und Bestand werden numerisch verglichen, nicht als Text. Letzte Änderung verwendet den tatsächlichen Zeitpunkt.
