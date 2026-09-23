@@ -2,9 +2,21 @@
 
 [Übersicht](../README.md) · [Bedienung](USER_GUIDE.md)
 
-Stand: 23.09.2026. Vollständige Liste der 57 vorhandenen Versionsmanifeste (0.9.1–0.9.57). Die folgenden Änderungsangaben werden aus deren `PatchNotes` wiedergegeben. Sie beschreiben den jeweiligen Entwicklungsstand, keine unabhängige QA- oder Live-Freigabe. Spätere Versionen können frühere Abläufe ersetzen; für die aktuelle Bedienung gilt die Anleitung.
+Stand: 23.09.2026. Vollständige Liste der 58 vorhandenen Versionsmanifeste (0.9.1–0.9.58). Die folgenden Änderungsangaben werden aus deren `PatchNotes` wiedergegeben. Sie beschreiben den jeweiligen Entwicklungsstand, keine unabhängige QA- oder Live-Freigabe. Spätere Versionen können frühere Abläufe ersetzen; für die aktuelle Bedienung gilt die Anleitung.
 
 Zeitangaben unten sind die UTC-Erstellungszeit der signierten Metadaten, nicht zwingend die GitHub-Veröffentlichungszeit. Maßgeblich für die aktivierte Version ist der signierte Kanalindex.
+
+## 0.9.58
+
+[Manifest](../updates/stable/0.9.58/manifest.beydosh.json) · [GitHub-Release](https://github.com/CrystalxSLY/beydosh-updates/releases/tag/v0.9.58)
+
+- Ausdrückliche EK-Steuerbasis; unbekannte Netto-/Brutto-Grundlage sperrt die Kalkulation statt einen ungesicherten VK auszugeben.
+- Frei konfigurierbare Gewinnstaffeln und progressive Gebührenstaffeln, sichtbar im Regelentwurf/Rechenweg und vom Markt-KI-Assistenten vorschlagbar.
+- Vorsichtige Gebührenrundung und Zielverdienstprüfung; keine Garantie für nicht erfasste Kosten oder unbestätigte Steuer-/Gebührenannahmen.
+- Automatische Variantenverknüpfung über gleiche vollständige Produktnamen; vorhandene manuelle Gruppen bleiben erhalten.
+- Variantenverwaltung im Produktfenster mit X zum Zurückkehren, Umbenennen, Hinzufügen und Entfernen von Mitgliedern.
+- Gruppen unter zwei Mitgliedern werden aufgelöst, Produkte bleiben erhalten. Manuell entfernte Mitglieder werden nicht automatisch erneut zugeordnet.
+- 128 automatisierte Desktop-Tests einschließlich 70.000 synthetischer Produkte und 3.000 progressiver Gebührenbeispiele erfolgreich.
 
 ## 0.9.57
 

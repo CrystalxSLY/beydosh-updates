@@ -17,6 +17,8 @@ Stand: 0.9.56. Bei Problemen zuerst installierte Version, betroffenen Bereich un
 
 Bei Altprodukten ohne EK-Währung die vorhandenen Quelldaten öffnen, korrekte Quellwährung wählen und erneut importieren. Keine Währung anhand eines Zahlenformats oder eines Landesnamens raten.
 
+Seit 0.9.58 zusätzlich **Preisregel bearbeiten → EK-Steuer** prüfen. „EK-Steuerbasis ungeklärt“ bedeutet, dass netto/brutto beziehungsweise wirtschaftliche Kosten und gegebenenfalls Einkaufssteuer/Vorsteuerabzug noch nicht bestätigt sind. Ein aktiver Markt allein reicht dafür nicht. Beleg bzw. tatsächliche Feldbeschreibung verwenden; keine persönliche Steuerannahme pauschal auf alle Quellen übertragen.
+
 Bei Shop-, EK- und Angebotswährung EUR ist keine EUR-zu-EUR-Umrechnung nötig. Bleibt trotzdem ein Kurshinweis, die vollständige Meldung und die tatsächlich gespeicherten Währungsfelder prüfen; nicht einfach einen Kurs erfinden.
 
 Die Tabelle gespeicherter Marktpreise kann leer bleiben, obwohl „Aktueller VK“ einen berechneten Wert zeigt. Die Vorschau ist kein gespeicherter oder veröffentlichter Preis.

@@ -2,7 +2,7 @@
 
 [Zur Übersicht](../README.md) · [Fehlerhilfe](TROUBLESHOOTING.md) · [Versionshistorie](CHANGELOG.md)
 
-Stand: 0.9.57, 23.09.2026. Beschrieben ist der aktuelle Owner-Development-Stand, keine Freigabe für produktiven Handel.
+Stand: 0.9.58, 23.09.2026. Beschrieben ist der aktuelle Owner-Development-Stand, keine Freigabe für produktiven Handel.
 
 ## 1. Aktualisieren und Daten erhalten
 
@@ -91,7 +91,11 @@ Die Länderanzahl umfasst konfigurierte Länder auch bei pausierten Regeln. „0
 
 Seit 0.9.55 ist der VK ausdrücklich der **Brutto-Endpreis** inklusive des eingetragenen Verkaufssteuersatzes. Der Rechenweg zeigt Netto, Steueranteil und Endpreis getrennt. Vorhandene Steuersätze werden nicht automatisch geändert. Bei zutreffender Steuerbefreiung gibt es keinen pauschalen Verkaufssteueraufschlag; Gebührensteuer ist eine andere Kostenposition. Die alte separate Nettomarktpreis-Tabelle bleibt weiterhin netto bezeichnet.
 
-Der EK muss wirtschaftliche Einkaufskosten darstellen: ohne abziehbare Vorsteuer, aber einschließlich nicht abziehbarer Steuer. Der Import rechnet nur Währungen um, nicht brutto in netto. Steuerstatus, EK-Steuerbasis und zusätzliche Plattform-Steuern beim Checkout müssen zum tatsächlichen Fall passen. Die KI soll unklare Brutto-/Netto-Vorgaben gezielt klären, statt Steuersätze zu erfinden.
+Seit 0.9.58 wird unter **Preisregel bearbeiten → EK-Steuer** ausdrücklich festgelegt, ob der gespeicherte EK netto, brutto oder bereits wirtschaftliche Einkaufskosten ist. Bei Netto-EK ohne Vorsteuerabzug wird die Einkaufssteuer einmal ergänzt; bei Brutto-EK mit Vorsteuerabzug wird sie einmal herausgerechnet. Die anderen beiden Kombinationen bleiben unverändert. Der Import selbst rechnet weiterhin nur Währungen um. Die Einstellung muss für alle Produkte dieser Regel nachweislich passen. Ungeklärte Bestandsregeln sind für die Berechnung gesperrt, bis die tatsächliche Steuerbasis festgelegt ist; es wird nichts aus einem Lieferantennamen geraten.
+
+**Gewinnstaffeln:** Unter Preis das Modell „Gewinnstaffel nach EK“ wählen. Bezugsgröße ist wahlweise importierter EK oder wirtschaftlicher Einkaufskostenwert, jeweils in Shopwährung. Zeilenformat `Von;Bis;Gewinn`, letzte Bis-Grenze `*`. Beispiel `0;100;5` und `100;*;10`: unter 100 gilt 5, ab genau 100 gilt 10. Es sind frei wählbare Beispiele, keine vorgegebenen Gewinnwerte. Lücken und Überschneidungen werden abgewiesen.
+
+**Progressive Gebühren:** Optional `Bis;Prozent` je Zeile, letzte Grenze `*`, fester Prozentsatz dann 0. Grenzen gelten in Angebotswährung; jeder Satz gilt nur für seinen Preisanteil. Nicht abziehbare Steuer auf Plattformgebühren muss bereits im effektiven Satz und festen Gebührenbetrag enthalten sein. Variable und feste Gebühren werden jeweils vorsichtig auf die gewählten Nachkommastellen aufgerundet; falls erforderlich wird bei festem Verdienst/Gewinnstaffeln der VK zur Deckung des Zielverdiensts erhöht. Die tatsächliche Anbieterabrechnung bleibt maßgeblich. Der ausgewiesene Verdienst ist vor nicht erfassten Kosten und Ertragsteuern, kein garantierter Unternehmensgewinn.
 
 Seit 0.9.56 zeigt die Auswahl eines Marktes seine Preisregeln als **waagerechte Kalkulationsreihe von EK bis VK brutto**. Pfeile führen das Zwischenergebnis weiter; Plus, Minus, Multiplikation, Division und Klammern zeigen den jeweiligen Rechenschritt. Die Reihe übernimmt Gewinnmodell, Gebührenbasis, Steuer, Wechselkurs und Rundung aus der Regel. Seit 0.9.57 bricht der Ablauf mit Verbindungspfeilen in weitere Zeilen um. Die Preisregel-Bearbeitung bleibt im Verkaufskanal-Fenster und zeigt den Ablauf unten über die gesamte Fensterbreite. Die gleiche Ansicht erscheint in KI-Entwürfen und der Preisregel-Beispielrechnung; geänderte Eingaben machen die bisherige Beispielreihe bis zur Neuberechnung ungültig.
 
@@ -146,3 +150,11 @@ Kalkulation, lokale Speicherung, Aktivierung einer Preisregel und Veröffentlich
 ## Produktsortierung
 
 Klick auf eine Spaltenüberschrift: ↑ aufsteigend, ↓ absteigend, dritter Klick hebt die Spaltensortierung auf. Einkaufspreis und Bestand werden numerisch verglichen, nicht als Text. Letzte Änderung verwendet den tatsächlichen Zeitpunkt.
+
+## Varianten
+
+Unter Produkte öffnet **Varianten** die Gruppenverwaltung im selben Fenster; **X** oben rechts führt zurück zur Produktliste. Bereits vorhandene Produkte werden dabei anhand ihres identischen vollständigen angezeigten Namens zugeordnet, einschließlich Hersteller, soweit Bestandteil des Namens. Neue Importe, neue Produkte und Produktbearbeitungen führen diesen Abgleich automatisch aus. Ähnliche, aber unterschiedliche Namen werden nicht geraten; vorhandene manuelle Gruppen bleiben erhalten.
+
+Links eine Gruppe wählen oder eine neue Gruppe beginnen. Rechts den Gruppennamen ändern, Mitglieder auswählen und entfernen oder weitere Produkte nach Name/Beydosh-ID suchen und hinzufügen. Bereits anderen Gruppen zugeordnete Produkte sind nicht erneut auswählbar. **Gruppe speichern** übernimmt die Änderung. Jede Produkt-ID, jeder Preis und alle Produktdateien bleiben eigenständig.
+
+Mindestens zwei Mitglieder sind notwendig. Bleiben weniger, wird die Gruppe aufgelöst – nicht das Produkt gelöscht. Manuell entfernte Mitglieder werden vom automatischen Wiederzuordnen ausgeschlossen und können bewusst wieder hinzugefügt werden. Bei großen Suchergebnissen werden höchstens 500 verfügbare Produkte gleichzeitig angezeigt; Suche entsprechend eingrenzen.
