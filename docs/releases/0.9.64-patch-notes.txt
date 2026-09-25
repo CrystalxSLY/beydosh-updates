@@ -1,0 +1,8 @@
+Gemeinsames Fundament: wiederverwendbare Symbole, Schliessen-Buttons, Eingabefelder und Aktionsbuttons fuer mehrere Programmteile zusammengefuehrt.
+E-Mail ohne eingerichtetes Postfach zeigt nur den mittigen Button E-Mail Dienst verbinden und Schliessen. Der Button fuehrt direkt zur Einrichtung.
+E-Mail mit Postfach nutzt eine durchgehend dunkle Darstellung. Lesen und Schreiben teilen sich den grossen rechten Bereich; Zurueck erhaelt den aktuellen Text waehrend der Sitzung.
+Der E-Mail-Button in der Kopfzeile ist an die Nachbarbuttons angeglichen. Gemeinsame Auswahllisten zeigen die Kontobezeichnung statt interner Objektdaten.
+Dezimalzahlen fuer Produktwerte, Marktstaffeln und Sortierung werden gemeinsam verarbeitet. Bestehende Zahlenformate und fachliche Grenzen bleiben erhalten; Preisformeln wurden nicht geaendert.
+KI-Verlaeufe und Kategorieentwuerfe verwenden eine gemeinsame atomare Dateispeicherung mit Sicherung der vorherigen Version. Konfliktpruefungen und Speichergrenzen bleiben erhalten.
+Ladehinweise ergaenzen Bitte kurz warten nicht mehr doppelt. Wiederverwendung ist als programmweite Entwicklungsregel dokumentiert und durch Regressionstests abgesichert.
+Beta-Testversion: keine neuen eBay-Livefunktionen, keine automatische E-Mail-Uebertragung und keine Core-Synchronisation. E-Mail bitte weiterhin mit einem separaten Testpostfach ohne echte Kundendaten pruefen.
