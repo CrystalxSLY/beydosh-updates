@@ -4,9 +4,9 @@
 
 ## Aktueller Stand
 
-Dokumentationsstand: **25. September 2026**. Im signierten Kanal ist **0.9.64** aktiviert. Die GitHub-Veröffentlichung ist ein **Owner-Development-Prerelease**, keine Freigabe für Live-Verkauf oder eine fertig abgenommene öffentliche Produktversion. Der Verzeichnisname `stable` ändert diese Einordnung nicht.
+Dokumentationsstand: **25. September 2026**. Im signierten Kanal ist **0.9.65** aktiviert. Die GitHub-Veröffentlichung ist ein **Owner-Development-Prerelease**, keine Freigabe für Live-Verkauf oder eine fertig abgenommene öffentliche Produktversion. Der Verzeichnisname `stable` ändert diese Einordnung nicht.
 
-Maßgeblich ist immer der vom Launcher verifizierte [signierte Kanalindex](updates/stable/latest.beydosh.json), nicht diese Versionsangabe. [Release 0.9.64](https://github.com/CrystalxSLY/beydosh-updates/releases/tag/v0.9.64) enthält das Update-Paket.
+Maßgeblich ist immer der vom Launcher verifizierte [signierte Kanalindex](updates/stable/latest.beydosh.json), nicht diese Versionsangabe. [Release 0.9.65](https://github.com/CrystalxSLY/beydosh-updates/releases/tag/v0.9.65) enthält das Update-Paket.
 
 ## Dokumentation
 
@@ -15,10 +15,14 @@ Maßgeblich ist immer der vom Launcher verifizierte [signierte Kanalindex](updat
 - [Versionsarchiv 0.9.1–0.9.58](docs/CHANGELOG.md)
 - [Veröffentlichung und kryptografischer Update-Vertrag](docs/PUBLISHING.md)
 - [Kanalstruktur](updates/stable/README.md)
-- [Nachweise und Grenzen der Veröffentlichung 0.9.64](docs/releases/0.9.64-publication.md)
+- [Nachweise und Grenzen der Veröffentlichung 0.9.65](docs/releases/0.9.65-publication.md)
 - [Historischer Owner-Test 0.9.1](docs/releases/0.9.1-owner-test.md)
 
-## Neu in 0.9.64
+## Neu in 0.9.65
+
+Die Postfachverwaltung zeigt eine Liste eingerichteter Postfächer. „Postfach hinzufügen“ öffnet die Einrichtung mit Hinzufügen und Abbrechen. Bei Auswahl eines Postfachs erscheinen rechts dessen Einstellungen und Signatur. Anlegen und Bearbeiten nutzen ein gemeinsames Formular. Doppelte Bereichsüberschriften entfallen im globalen Header. [Patch Notes](docs/releases/0.9.65-patch-notes.txt).
+
+## Grundlage aus 0.9.64
 
 Gemeinsame Symbole, Schließen-Buttons, Eingabefelder, Zahlenverarbeitung und Entwurfsspeicherung wurden zusammengeführt. Ohne Postfach zeigt E-Mail nur die Verbindungsaktion; mit Postfach gibt es eine dunkle Leseansicht und einen getrennten Schreibmodus. Die erste Mail-Beta bleibt auf manuelle IMAP-/SMTP-Aktionen begrenzt; keine automatische Synchronisierung und keine neuen eBay-Livefunktionen. Details und Testgrenzen stehen im Veröffentlichungsnachweis.
 

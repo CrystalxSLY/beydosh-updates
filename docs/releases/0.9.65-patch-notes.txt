@@ -1,0 +1,7 @@
+Beydosh PIM 0.9.65 (Beta): aufgeräumte Postfachverwaltung und Kopfzeile.
+E-Mail-Einstellungen zeigen zunächst nur Postfach hinzufügen; eingerichtete Postfächer erscheinen links als Liste.
+Neue Postfächer werden in einem Popup mit Name, E-Mail und Verbindungsdaten angelegt. Abbrechen verwirft die Eingaben.
+Bei Auswahl eines Postfachs erscheinen rechts dessen Verbindungseinstellungen, Absender und Signatur.
+Anlegen und Bearbeiten verwenden ein gemeinsames Formular. Speicherfehler lassen den Dialog offen; neue Zugangsdaten werden bei fehlgeschlagenem Speichern zurückgenommen.
+Doppelte Bereichsüberschriften wurden aus der gemeinsamen Kopfzeile entfernt. Die Überschrift bleibt im jeweiligen Seiteninhalt.
+Keine Änderung an Preisberechnungen oder Versand. Keine automatische E-Mail-Übertragung beim Öffnen oder Anlegen eines Postfachs.
