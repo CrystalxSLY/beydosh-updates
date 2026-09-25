@@ -1,22 +1,26 @@
-# Beydosh Update Channel
+# Beydosh PIM Update Channel
 
 Öffentlicher Kanal für signierte Updates der Beydosh-Windows-Anwendung. Dieses Repository enthält Update-Metadaten, Dokumentation und Verweise auf Pakete, nicht den Anwendungsquellcode.
 
 ## Aktueller Stand
 
-Dokumentationsstand: **23. September 2026**. Im signierten Kanal ist **0.9.58** aktiviert. Die GitHub-Veröffentlichung ist ein **Owner-Development-Prerelease**, keine Freigabe für Live-Verkauf oder eine fertig abgenommene öffentliche Produktversion. Der Verzeichnisname `stable` ändert diese Einordnung nicht.
+Dokumentationsstand: **25. September 2026**. Im signierten Kanal ist **0.9.64** aktiviert. Die GitHub-Veröffentlichung ist ein **Owner-Development-Prerelease**, keine Freigabe für Live-Verkauf oder eine fertig abgenommene öffentliche Produktversion. Der Verzeichnisname `stable` ändert diese Einordnung nicht.
 
-Maßgeblich ist immer der vom Launcher verifizierte [signierte Kanalindex](updates/stable/latest.beydosh.json), nicht diese Versionsangabe. [Release 0.9.58](https://github.com/CrystalxSLY/beydosh-updates/releases/tag/v0.9.58) enthält das Update-Paket.
+Maßgeblich ist immer der vom Launcher verifizierte [signierte Kanalindex](updates/stable/latest.beydosh.json), nicht diese Versionsangabe. [Release 0.9.64](https://github.com/CrystalxSLY/beydosh-updates/releases/tag/v0.9.64) enthält das Update-Paket.
 
 ## Dokumentation
 
 - [Bedienung: Update, Import, Währungen, Märkte, Versand und KI](docs/USER_GUIDE.md)
 - [Fehlerhilfe und bekannte Grenzen](docs/TROUBLESHOOTING.md)
-- [Vollständige Versionshistorie 0.9.1–0.9.58](docs/CHANGELOG.md)
+- [Versionsarchiv 0.9.1–0.9.58](docs/CHANGELOG.md)
 - [Veröffentlichung und kryptografischer Update-Vertrag](docs/PUBLISHING.md)
 - [Kanalstruktur](updates/stable/README.md)
-- [Nachweise und Grenzen der Veröffentlichung 0.9.58](docs/releases/0.9.58-publication.md)
+- [Nachweise und Grenzen der Veröffentlichung 0.9.64](docs/releases/0.9.64-publication.md)
 - [Historischer Owner-Test 0.9.1](docs/releases/0.9.1-owner-test.md)
+
+## Neu in 0.9.64
+
+Gemeinsame Symbole, Schließen-Buttons, Eingabefelder, Zahlenverarbeitung und Entwurfsspeicherung wurden zusammengeführt. Ohne Postfach zeigt E-Mail nur die Verbindungsaktion; mit Postfach gibt es eine dunkle Leseansicht und einen getrennten Schreibmodus. Die erste Mail-Beta bleibt auf manuelle IMAP-/SMTP-Aktionen begrenzt; keine automatische Synchronisierung und keine neuen eBay-Livefunktionen. Details und Testgrenzen stehen im Veröffentlichungsnachweis.
 
 ## Update installieren
 
